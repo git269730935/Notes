@@ -39,7 +39,7 @@ composer config -g repo.packagist composer https://packagist.phpcomposer.com
 Linux 平台可以使用以下命令来安装：
 
 ```shell
-php -r "copy('https://install.phpcomposer.com/installer', 'composer- setup.php');"
+php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
 php composer-setup.php
 ```
 
