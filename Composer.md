@@ -1,7 +1,5 @@
 # Composer
 
-## 介绍
-
 > 官网： https://www.phpcomposer.com/
 
 Composer 是 PHP 的一个依赖管理工具。
