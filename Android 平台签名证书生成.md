@@ -4,7 +4,7 @@ Android 平台打包发布apk应用，需要使用数字证书（.keystore文件
 
 Android 证书的生成是自助和免费的，不需要审批或付费。
 
-## Keytool -genkey 命令生成证书
+## Keytool 命令生成证书
 
 ### 安装 JRE（如已有可跳过）
 
@@ -36,9 +36,9 @@ set PATH=%PATH%;"C:\Program Files\Java\jre1.8.0_201\bin"
 keytool -genkey -alias testalias -keyalg RSA -keysize 2048 -validity 36500 -keystore test.keystore
 ```
 
-- testalias是证书别名，可修改为自己想设置的字符，建议使用英文字母和数字
-- test.keystore是证书文件名称，可修改为自己想设置的文件名称，也可以指定完整文件路径
-- 36500是证书的有效期，表示100年有效期，单位天，建议时间设置长一点，避免证书过期
+- testalias 是证书别名，可修改为自己想设置的字符，建议使用英文字母和数字
+- test.keystore 是证书文件名称，可修改为自己想设置的文件名称，也可以指定完整文件路径
+- 36500 是证书的有效期，表示 100 年有效期，单位天，建议时间设置长一点，避免证书过期
 
 回车后会提示：
 
@@ -64,14 +64,24 @@ Enter key password for <testalias>
         (RETURN if same as keystore password):  //确认证书密码与证书文件密码一样（HBuilder|HBuilderX要求这两个密码一致），直接回车就可以
 ```
 
-**注意：上述信息填写要规范，乱填有可能会影响应用上架应用市场。**
+> 注意：上述信息填写要规范，乱填有可能会影响应用上架应用市场。
+
+#### Google 开发者证书信息有误，请正确填写相关信息
+
+在HBuilder | HBuilderX 中出现这个提示是因为密钥库类型和官方的不一样。
+
+更改密钥库类型：
+
+```
+keytool -importkeystore -srckeystore ./test.keystore -destkeystore ./test.keystore -deststoretype JKS
+```
 
 ### 查看证书信息
 
 可以使用以下命令查看：
 
 ```
-keytool -list -v -keystore test.keystore  
+keytool -list -v -keystore test.keystore
 Enter keystore password: //输入密码，回车
 ```
 
@@ -109,3 +119,12 @@ Version: 3
   证书的SHA1指纹信息（安全码SHA1）
 - SHA256
   证书的SHA256指纹信息（安全码SHA245）
+
+> MD5 的签名目前不知到什么原因在比较高版本的 Java 中获取不到，可以用下面的方法获取
+
+#### 安卓签名获取工具
+
+直接通过一个apk，获取安装到手机的第三方应用签名的apk包。 
+
+详情：https://developers.weixin.qq.com/doc/oplatform/Downloads/Android_Resource.html
+
